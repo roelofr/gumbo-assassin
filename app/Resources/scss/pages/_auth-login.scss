@@ -1,0 +1,43 @@
+/**
+ * Login screen, which features large cover art on some devices.
+ *
+ * @author roelofr
+ */
+
+// .page-login-v2 {
+//
+// }
+
+.page-login {
+  &__art {
+    @include mobile {
+      display: none;
+    }
+  }
+
+  &__form {
+    margin-top: $gap;
+  }
+}
+
+@include tablet {
+  &__art {
+    display: flex;
+  }
+
+  .column-login-form {
+    max-width: 400px;
+  }
+}
+
+// The login form container
+.login-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+
+  &__inner {
+    max-width: 350px;
+  }
+}

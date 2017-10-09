@@ -1,0 +1,21 @@
+/**
+ * Main stylesheet, combines our config and variables with Bulma and some
+ * bootstrap utilities.
+ *
+ * @author roelofr
+ */
+
+// Load viarables first, this includes the overrides for Bulma.
+@import 'variables/all';
+
+// Import Bulma.
+@import '~bulma/bulma';
+
+// Load mixins
+@import 'mixins/all';
+
+// Load components
+@import 'components/all';
+
+// Load pages.
+@import 'pages/all';

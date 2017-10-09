@@ -1,0 +1,16 @@
+/**
+ * Loads all pages
+ *
+ * @author roelofr
+ */
+
+// Content pages
+@import 'main';
+
+// App pages
+@import 'app-user';
+@import 'app-admin';
+
+// Login and registration pages
+@import 'auth-login';
+@import 'auth-register';
