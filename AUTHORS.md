@@ -1,3 +1,3 @@
 # Authors
 
-- Roelof Roos <github@roelof.io> - Lead programmer
+- [Roelof Roos](https://github.com/roelofr) - Lead programmer
