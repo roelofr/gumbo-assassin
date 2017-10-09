@@ -1,0 +1,9 @@
+{
+  "name": "@gumbo/gotcha",
+  "version": "1.0.0",
+  "description": "Gotcha, but as a web-app",
+  "main": "bin/console",
+  "author": "Roelof Roos <github@roelof.io>",
+  "license": "AGPL-3.0",
+  "private": true
+}
