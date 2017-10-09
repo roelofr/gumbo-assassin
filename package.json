@@ -1,9 +1,14 @@
 {
-  "name": "@gumbo/gotcha",
-  "version": "1.0.0",
-  "description": "Gotcha, but as a web-app",
-  "main": "bin/console",
-  "author": "Roelof Roos <github@roelof.io>",
+  "name": "@gumbo/assassin",
   "license": "AGPL-3.0",
-  "private": true
+  "private": true,
+  "devDependencies": {},
+  "browserslist": [
+    "> 5% in NL",
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Edge versions",
+    "last 2 Opera versions",
+    "not IE >= 1"
+  ]
 }
