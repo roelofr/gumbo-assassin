@@ -6,7 +6,7 @@
     "@symfony/webpack-encore": "^0.15.1",
     "autoprefixer": "^7.1.5",
     "babel-preset-env": "^1.6.0",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^4.0.0-beta",
     "bulma": "^0.5.3",
     "copy-webpack-plugin": "^4.1.1",
     "eslint": "^4.8.0",
