@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\Player">
+    <!-- Link items by UUID -->
+    <id name="id" type="uuid" >
+        <generator strategy="CUSTOM"/>
+        <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator"/>
+    </id>
+
+    <!-- Add queries, these will be cached to work quicker -->
+    <named-queries>
+      <named-query name="deep-game" query="
+        SELECT p, u FROM AppBundle:Player p
+        JOIN AppBundle:User u
+        WHERE p.game = :game
+        ORDER BY LOWER(u.username) DESC" />
+      <named-query name="deep-game-role" query="
+        SELECT p, u FROM AppBundle:Player p
+        JOIN AppBundle:User u
+        WHERE p.game = :game AND p.role = :role
+        ORDER BY LOWER(u.username) DESC" />
+      <named-query name="deep-user" query="
+        SELECT p, g FROM AppBundle:Player p
+        JOIN AppBundle:Game g
+        WHERE p.player = :player
+        ORDER BY LOWER(g.alias) DESC" />
+      <named-query name="kd-ratio" query="
+        SELECT COUNT(p.kills) / COUNT(p.deaths)
+        FROM AppBundle:Player p
+        WHERE p.id = :id" />
+    </named-queries>
+
+    <!-- Throw in an index on user and game, to speed up sorting -->
+    <indexes>
+      <index columns="user_id" />
+      <index columns="game_id" />
+    </indexes>
+
+    <!-- Make sure only one user is present in each game -->
+    <unique-constraints>
+      <unique-constraint columns="user_id,game_id" />
+    </unique-constraints>
+
+    <!-- Add basic fields -->
+    <field name="alive" type="boolean" column="alive"/>
+    <field name="role" type="role_enum" column="role"/>
+
+    <!-- Add reverse field to the user -->
+    <many-to-one
+      target-entity="AppBundle\Entity\User"
+      field="user"
+      column="user_id"
+      inversed-by="players"
+      fetch="EAGER" />
+
+    <!-- Add the player's target -->
+    <many-to-one
+      target-entity="AppBundle\Entity\Player"
+      field="target"
+      column="target_id" />
+
+    <!-- Add the game to which this player belongs -->
+    <many-to-one
+      target-entity="AppBundle\Entity\Game"
+      field="game"
+      column="game_id"
+      inversed-by="players" />
+
+    <!-- Add the player's kills (reverse query) -->
+    <one-to-many
+      target-entity="AppBundle\Entity\Hit"
+      field="kills"
+      mapped-by="assassin">
+      <order-by><order-by-field name="date" direction="DESC" /></order-by>
+    </one-to-many>
+
+    <!-- Add the player's deaths (reverse query) -->
+    <one-to-many
+      target-entity="AppBundle\Entity\Hit"
+      field="deaths"
+      mapped-by="victim">
+      <order-by><order-by-field name="date" direction="DESC" /></order-by>
+    </one-to-many>
+  </entity>
+</doctrine-mapping>

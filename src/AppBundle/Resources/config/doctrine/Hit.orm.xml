@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity repository-class="AppBundle\Repository\HitRepository" name="AppBundle\Entity\Hit">
+    <!-- Map hits by UUID -->
+    <id name="id" type="uuid" >
+        <generator strategy="CUSTOM"/>
+        <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator"/>
+    </id>
+
+    <!-- Place an index on assassin, target and game -->
+    <indexes>
+      <index columns="assassin_id" />
+      <index columns="victim_id" />
+      <index columns="game_id" />
+    </indexes>
+
+    <!-- Add basic fields -->
+    <field name="date" type="datetime" column="date"/>
+    <field name="location" type="array" column="location"/>
+    <field name="approved" type="approval_enum" column="approved"/>
+
+    <!-- Add assassin and victim -->
+    <many-to-one
+      target-entity="AppBundle\Entity\Player"
+      field="assassin"
+      column="assassin_id"
+      inversed-by="kills"/>
+
+    <many-to-one
+      target-entity="AppBundle\Entity\Player"
+      field="victim"
+      column="victim_id"
+      inversed-by="deaths"/>
+
+    <!-- Add referee that approved the change -->
+    <many-to-one
+      target-entity="AppBundle\Entity\User"
+      field="approvedBy"
+      column="approved_by_id"
+      reversed-by="approvals"/>
+
+    <!-- Always add a game too, to ease up purging -->
+    <many-to-one
+      target-entity="AppBundle\Entity\Game"
+      field="game"
+      column="game_id"
+      inversed-by="hits"/>
+  </entity>
+</doctrine-mapping>

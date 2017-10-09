@@ -1,0 +1,51 @@
+CREATE TABLE game (
+    id CHAR(36) NOT NULL COMMENT '(DC2Type:uuid)',
+    host_id CHAR(36) DEFAULT NULL COMMENT '(DC2Type:uuid)',
+    title VARCHAR(255) NOT NULL,
+    description LONGTEXT NOT NULL,
+    alias VARCHAR(60) NOT NULL,
+    UNIQUE INDEX UNIQ_232B318CE16C6B94 (alias),
+    INDEX IDX_232B318C1FB8D185 (host_id),
+    PRIMARY KEY(id)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB;
+
+CREATE TABLE player (
+    id CHAR(36) NOT NULL COMMENT '(DC2Type:uuid)',
+    user_id CHAR(36) DEFAULT NULL COMMENT '(DC2Type:uuid)',
+    target_id CHAR(36) DEFAULT NULL COMMENT '(DC2Type:uuid)',
+    game_id CHAR(36) DEFAULT NULL COMMENT '(DC2Type:uuid)',
+    alive TINYINT(1) NOT NULL,
+    role VARCHAR(255) NOT NULL,
+    INDEX IDX_98197A65158E0B66 (target_id),
+    INDEX IDX_98197A65A76ED395 (user_id),
+    INDEX IDX_98197A65E48FD905 (game_id),
+    UNIQUE INDEX UNIQ_98197A65A76ED395E48FD905 (user_id, game_id),
+    PRIMARY KEY(id)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB;
+
+CREATE TABLE hit (
+    id CHAR(36) NOT NULL COMMENT '(DC2Type:uuid)',
+    assassin_id CHAR(36) DEFAULT NULL COMMENT '(DC2Type:uuid)',
+    victim_id CHAR(36) DEFAULT NULL COMMENT '(DC2Type:uuid)',
+    approved_by_id CHAR(36) DEFAULT NULL COMMENT '(DC2Type:uuid)',
+    game_id CHAR(36) DEFAULT NULL COMMENT '(DC2Type:uuid)',
+    date DATETIME NOT NULL,
+    location LONGTEXT NOT NULL COMMENT '(DC2Type:array)',
+    approved VARCHAR(255) NOT NULL,
+    INDEX IDX_5AD226412D234F6A (approved_by_id),
+    INDEX IDX_5AD22641B421A54D (assassin_id),
+    INDEX IDX_5AD2264144972A0E (victim_id),
+    INDEX IDX_5AD22641E48FD905 (game_id),
+    PRIMARY KEY(id)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB;
+
+CREATE TABLE user (
+    id CHAR(36) NOT NULL COMMENT '(DC2Type:uuid)',
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    username VARCHAR(60) NOT NULL,
+    password LONGTEXT DEFAULT NULL,
+    UNIQUE INDEX UNIQ_8D93D649E7927C74 (email),
+    UNIQUE INDEX UNIQ_8D93D649F85E0677 (username),
+    PRIMARY KEY(id)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB;

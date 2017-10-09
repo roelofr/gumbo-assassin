@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity repository-class="AppBundle\Repository\GameRepository" name="AppBundle\Entity\Game">
+
+    <!-- Games have UUIDs, users can find them by their alias -->
+    <id name="id" type="uuid" >
+        <generator strategy="CUSTOM"/>
+        <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator"/>
+    </id>
+
+    <!-- Make sure the alias remains unique -->
+    <unique-contraints>
+      <unique-contraint columns="alias" />
+    </unique-contraints>
+
+    <!-- Add simple fields -->
+    <field name="title" type="string" column="title" length="255"/>
+    <field name="description" type="text" column="description"/>
+    <field name="alias" type="string" column="alias" length="60" unique="true"/>
+
+    <!-- Add host (many-to-one) -->
+    <many-to-one
+      target-entity="AppBundle\Entity\User"
+      field="host"
+      column="host_id"
+      inversed-by="games">
+      <order-by>
+        <order-by-field name="username" direction="ASC" />
+      </order-by>
+    </many-to-one>
+
+    <!-- Add one to many relationships (inversed joins) -->
+    <one-to-many
+      target-entity="AppBundle\Entity\Hit"
+      field="hits"
+      mapped-by="game">
+      <order-by><order-by-field name="date" direction="DESC" /></order-by>
+    </one-to-many>
+
+    <one-to-many
+      target-entity="AppBundle\Entity\Player"
+      field="players"
+      mapped-by="game">
+      <order-by><order-by-field name="date" direction="DESC" /></order-by>
+    </one-to-many>
+  </entity>
+</doctrine-mapping>
