@@ -1,4 +1,4 @@
-# Gumbo Millennium Gotcha
+# Gumbo Millennium Assassin
 
 Play Gotcha over long distances, sign up using your OAuth2 account from any
 provider and let the computer automatically select your enemies.
