@@ -7,10 +7,22 @@ framework:
         storage_id: session.storage.mock_file
     profiler:
         collect: false
+    # Travis uses a normal redis cache
+    cache:
+        default_redis_provider: 'redis://localhost'
 
 web_profiler:
     toolbar: false
     intercept_redirects: false
+
+# Use Travis-provided MySQL for the testing environment
+doctrine:
+    dbal:
+        server_version: 14.14
+        driver: pdo_mysql
+        dbname: symfony_test
+        user: travis
+        password: ''
 
 swiftmailer:
     disable_delivery: true
