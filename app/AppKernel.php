@@ -5,6 +5,8 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel
 {
+    protected $name = 'Assassin';
+
     public function registerBundles()
     {
         $bundles = [
