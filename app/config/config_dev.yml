@@ -11,6 +11,16 @@ web_profiler:
     toolbar: true
     intercept_redirects: false
 
+# Use the MySQL in Docker for the development environment
+doctrine:
+    dbal:
+        driver: pdo_mysql
+        host: 127.0.0.1
+        port: '13306'
+        dbname: appdb
+        user: symfony
+        password: phoox2ahthahb8iejuaquoPah9shae8w
+
 monolog:
     handlers:
         main:
