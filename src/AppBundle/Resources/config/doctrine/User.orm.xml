@@ -10,8 +10,8 @@
     <!-- Make sure the alias remains unique -->
 
     <!-- Add simple fields -->
-    <field name="name" type="string" column="name" length="255"/>
-    <field name="email" type="string" column="email" length="255" unique="true"/>
+    <field name="name" type="string" column="name" />
+    <field name="email" type="string" column="email" length="190" unique="true"/>
     <field name="username" type="string" column="username" length="60" unique="true"/>
     <field name="password" type="text" column="password" nullable="true"/>
 
