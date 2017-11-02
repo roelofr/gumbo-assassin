@@ -2,29 +2,66 @@ version: '2.2'
 
 volumes:
   mysql-data:
+  redis-data:
 
 networks:
   gotcha:
     driver: bridge
 
 services:
-  # redis:
-  #     image: redis:4-alpine
-  #     ports:
-  #         - "127.0.0.18:6379:6379"
+  redis:
+    image: redis:4-alpine
+    hostname: redis.assassin.local
+    networks:
+      - gotcha
+    ports:
+      - "127.13.37.1:6379:6379"
+    volumes:
+      - redis-data:/data
+
   mysql:
     image: mariadb
     hostname: mysql.assassin.local
     networks:
       - gotcha
     ports:
-      - "127.0.0.18:3306:3306"
+      - "127.13.37.1:3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
     environment:
-      # MySQL isn't publicly visible, there's no real need to be very
-      # secure about these passwords
-      MYSQL_ROOT_PASSWORD: caesheesh5iY0aep4ia7mei9wohfah6a
-      MYSQL_USER: symfony
-      MYSQL_PASSWORD: phoox2ahthahb8iejuaquoPah9shae8w
-      MYSQL_DATABASE: appdb
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+
+      # The Docker MySQL isn't publicly visible (it's linked to a link-local
+      # address after all), there's no real need to be very secure about
+      # these passwords.
+      MYSQL_DATABASE: assassin
+      MYSQL_USER: assassin_usr
+      MYSQL_PASSWORD: tiemu7waf4Zei7eit0eive7Mee8quah2
+
+  laravel:
+    image: hitalos/laravel:latest
+    hostname: assassin.local
+    networks:
+      - gotcha
+    ports:
+      - "127.13.37.1:8000:80"
+    volumes:
+      - ./api:/var/www
+    environment:
+      APP_ENV: 'local'
+      APP_DEBUG: 'true'
+      APP_LOG_LEVEL: 'debug'
+
+      DB_HOST: mysql.assassin.local
+      DB_PORT: '3306'
+      DB_DATABASE: assassin
+      DB_USERNAME: assassin_usr
+      DB_PASSWORD: tiemu7waf4Zei7eit0eive7Mee8quah2
+      DB_CONNECTION: mysql
+
+      REDIS_HOST: redis.assassin.local
+      REDIS_PASSWORD: null
+      REDIS_PORT: '6379'
+    depends_on:
+      - redis
+      - mysql

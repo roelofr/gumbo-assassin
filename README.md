@@ -13,7 +13,6 @@ More information about Assassin can be [found on Wikipedia][wiki]
 
 [wiki]: https://en.wikipedia.org/wiki/Assassin_(game)
 
-
 ## License
 
 As this is a project by and for students and the associated community, and
@@ -59,6 +58,37 @@ The application has the following requirements:
 4. Prevent fraud by reporting all hits to referees, allowing them to decline
    the hit if they deem that required. Hits are auto-approved after 6 hrs.
 
-## Development timeline
+## Development
+
+### Getting started
+
+To get started on working with the application, do the following:
+
+1. Install the following packages:
+  - [PHP 7.1+][php],
+  - [Composer][composer],
+  - [Docker][docker],
+  - [Docker Compose][docker-compose] (Only for Linux, Docker compose comes packaged with the Mac and Windows install),
+  - [NodeJs][nodejs] and
+  - [Yarn][yarn] (optional, but very highly recommended).
+1. Run these commands, in order:
+  1. `docker-compose up -d mysql redis` (To start a MariaDB server at `127.13.37.1:3306`)
+  2. `composer install` (To install all PHP dependencies and configure [Laravel][laravel])
+  3. `yarn install` (To install all Node dependencies)
+  4. `yarn build` (To build the Javascript and Sass files)
+  1. `docker-compose up -d laravel` (To start Laravel in a docker container)
+1. Go to [`http://127.13.37.1:8000`][laravel-server] and try out the app.
+
+[php]: https://php.net
+[composer]: https://getcomposer.org
+[docker]: https://docker.com
+[docker-compose]: https://docs.docker.com/compose/install/
+[nodejs]: https://nodejs.org/en/download/
+[yarn]: https://yarnpkg.com/en/docs/install
+[laravel]: https://laravel.com/
+[laravel-server]: http://127.13.37.1:8000
+
+### Timeline
 
 - October 9, 2017 - Development started
+- November 2, 2017 - Added React, first API outline, docker containers
