@@ -1,7 +1,8 @@
 /**
  * Encore configuration, handles creating all static assets
  *
- * @author roelofr*/
+ * @author roelofr
+ */
 
 // webpack.config.js
 const Encore = require('@symfony/webpack-encore')
@@ -21,10 +22,11 @@ Encore
   .cleanupOutputBeforeBuild()
 
   // will output as web/build/app.js
-  .addEntry('app', './app/Resources/js/main.js')
+  .createSharedEntry('vendor', ['react', 'react-dom'])
+  .addEntry('js/app', './app/Resources/js/main.js')
 
   // will output as web/build/main.css
-  .addStyleEntry('main', './app/Resources/scss/main.scss')
+  .addStyleEntry('css/app', './app/Resources/scss/main.scss')
 
   // allow sass/scss files to be processed
   .enableSassLoader()

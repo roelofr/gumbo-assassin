@@ -1,8 +1,18 @@
-# Extend a sane default set
+# Stylelint Config
+#
+# @author Roelof Roos
+
 extends: "stylelint-config-standard"
+
+plugins:
+  - "stylelint-scss"
+  - "stylelint-declaration-strict-value"
 
 # And add some of our rules
 rules:
+  # NEVER write vendor prefixes, Autoprefixer will take care of that
+  value-no-vendor-prefix: true
+
   # Enure lowercase everything
   property-case: lower
   selector-pseudo-class-case: lower
@@ -20,15 +30,12 @@ rules:
   color-named: never
   color-no-invalid-hex: true
 
+  # And to keep things simple, just use `.2` to write decimal digits, not `0.2`
+  number-leading-zero: never
+
   # And make sure all resources are loaded explicitly over https, or are local
   function-url-no-scheme-relative: true
   function-url-scheme-whitelist: ['data', 'https']
-
-  # Enforce some styling bits
-  string-quotes: single
-  length-zero-no-unit: true
-  number-leading-zero: never
-  declaration-colon-newline-after: null
 
   # Allow some newlines between blocks
   declaration-empty-line-before:
@@ -40,9 +47,26 @@ rules:
   keyframe-declaration-no-important: true
   declaration-no-important: true
 
-  # And exclude some scss-specific at rules
+  # Finally, cut some slack on @-rules for all Sass methods.
   at-rule-no-unknown:
     - true
-    - ignoreAtRules:
-      - 'include'
-      - 'mixin'
+    - ignoreAtRules: &sass-rules
+      - content
+      - else
+      - error
+      - extend
+      - function
+      - if
+      - import
+      - include
+      - mixin
+      - return
+  at-rule-empty-line-before:
+    - always
+    - ignoreAtRules: *sass-rules
+
+  # Force to use variables on a lot of colour elements
+  scale-unlimited/declaration-strict-value:
+    - /-color$/
+    - color
+    - /font-(family|weight)/
