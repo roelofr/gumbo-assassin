@@ -1,20 +1,21 @@
 extends:
-    - standard
-    - plugin:react/recommended
+  - standard
+  - plugin:react/recommended
 
 env:
-    browser: true
-    commonjs: true
-    es6: true
+  browser: true
+  commonjs: true
+  es6: true
 
-plugins: ["react"]
+plugins:
+  - react
 
 parserOptions:
-    ecmaVersion: 7
-    sourceType: "module"
-    ecmaFeatures:
-        jsx: true
+  ecmaVersion: 7
+  sourceType: module
+  ecmaFeatures:
+    jsx: true
 
 rules:
-    react/prop-types: 0
-    react/react-in-jsx-scope: 0
+  react/prop-types: 0
+  react/react-in-jsx-scope: 0

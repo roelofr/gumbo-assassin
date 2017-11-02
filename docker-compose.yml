@@ -1,20 +1,30 @@
-version: '3.0'
+version: '2.2'
+
+volumes:
+  mysql-data:
+
+networks:
+  gotcha:
+    driver: bridge
 
 services:
-    # redis:
-    #     image: redis:4-alpine
-    #     ports:
-    #         - "127.0.0.1:16379:6379"
-    mysql:
-        image: mariadb:10.1
-        ports:
-            - "127.0.0.1:13306:3306"
-        volumes:
-            - ./var/data/mysql:/var/lib/mysql
-        environment:
-            # MySQL isn't publicly visible, there's no real need to be very
-            # secure about these passwords
-            MYSQL_ROOT_PASSWORD: caesheesh5iY0aep4ia7mei9wohfah6a
-            MYSQL_USER: symfony
-            MYSQL_PASSWORD: phoox2ahthahb8iejuaquoPah9shae8w
-            MYSQL_DATABASE: appdb
+  # redis:
+  #     image: redis:4-alpine
+  #     ports:
+  #         - "127.0.0.18:6379:6379"
+  mysql:
+    image: mariadb
+    hostname: mysql.assassin.local
+    networks:
+      - gotcha
+    ports:
+      - "127.0.0.18:3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      # MySQL isn't publicly visible, there's no real need to be very
+      # secure about these passwords
+      MYSQL_ROOT_PASSWORD: caesheesh5iY0aep4ia7mei9wohfah6a
+      MYSQL_USER: symfony
+      MYSQL_PASSWORD: phoox2ahthahb8iejuaquoPah9shae8w
+      MYSQL_DATABASE: appdb

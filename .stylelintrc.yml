@@ -2,11 +2,11 @@
 #
 # @author Roelof Roos
 
-extends: "stylelint-config-standard"
+extends: stylelint-config-standard
 
 plugins:
-  - "stylelint-scss"
-  - "stylelint-declaration-strict-value"
+  - stylelint-scss
+  - stylelint-declaration-strict-value
 
 # And add some of our rules
 rules:

@@ -1,20 +1,22 @@
 language: php
+
 php:
   - '7.1'
+  - '7.2'
   - nightly
 
 services:
-    - mysql
-    - redis
+  - mysql
+  - redis
 
 cache:
-    directories:
-        - /home/travis/.composer
-        - vendor/
-        - node_modules/
+  directories:
+    - /home/travis/.composer
+    - vendor/
+    - node_modules/
 
 env:
-    - SYMFONY_ENV=test
+  - SYMFONY_ENV=test
 
 # Create testing database and user
 before_install:
@@ -24,9 +26,9 @@ before_install:
   - 'export PATH="${PATH}:${HOME}/.composer/vendor/bin"'
 
 before_script:
-    - composer install --no-suggest
-    - php bin/console doctrine:schema:create --dump-sql
+  - composer install --no-suggest
+  - php bin/console doctrine:schema:create --dump-sql
 
 script:
-    - phpunit
-    - phpcs -n
+  - phpunit
+  - phpcs -n
