@@ -15,11 +15,11 @@ web_profiler:
 doctrine:
     dbal:
         driver: pdo_mysql
-        host: 127.0.0.1
-        port: '13306'
-        dbname: appdb
-        user: symfony
-        password: phoox2ahthahb8iejuaquoPah9shae8w
+        host: 127.13.37.1
+        port: '3306'
+        dbname: assassin
+        user: assassin_usr
+        password: tiemu7waf4Zei7eit0eive7Mee8quah2
 
 monolog:
     handlers:
