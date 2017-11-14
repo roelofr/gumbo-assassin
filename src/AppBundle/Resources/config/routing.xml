@@ -6,6 +6,24 @@
     <default key="_controller">AppBundle:Default:index</default>
   </route>
 
+  <!-- GameController -->
+  <!-- GameController → list -->
+  <route id="list" path="/games/">
+    <default key="_controller">AppBundle:Game:list</default>
+  </route>
+  <!-- GameController → join -->
+  <route id="join" path="/games/join">
+    <default key="_controller">AppBundle:Game:join</default>
+  </route>
+  <!-- GameController → leave -->
+  <route id="leave" path="/games/leave">
+    <default key="_controller">AppBundle:Game:leave</default>
+  </route>
+  <!-- GameController → current -->
+  <route id="current" path="/games/current">
+    <default key="_controller">AppBundle:Game:current</default>
+  </route>
+
   <!-- FaviconController -->
   <!-- FaviconController → manifest.json -->
   <route id="favicon_manifest" path="/manifest.json">
