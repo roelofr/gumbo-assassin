@@ -27,6 +27,7 @@ Encore
 
   // will output as web/build/main.css
   .addStyleEntry('css/app', './app/Resources/scss/main.scss')
+  .addStyleEntry('css/launch', './app/Resources/scss/launch.scss')
 
   // allow sass/scss files to be processed
   .enableSassLoader()

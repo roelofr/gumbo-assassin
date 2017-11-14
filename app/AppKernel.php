@@ -39,6 +39,15 @@ class AppKernel extends Kernel
         return __DIR__;
     }
 
+    /**
+     * Returns the web directory, as absolute path.
+     * @return string
+     */
+    public function getWebDir()
+    {
+        return dirname(__DIR__) . '/web';
+    }
+
     public function getCacheDir()
     {
         return dirname(__DIR__).'/var/cache/'.$this->getEnvironment();

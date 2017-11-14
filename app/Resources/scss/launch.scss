@@ -1,0 +1,90 @@
+///
+/// Launch stylesheet
+///
+/// Injected in the <head> as plain text, so keep it simple!
+///
+/// @author Roelof Roos
+
+// Load our variables
+@import 'variables/all';
+
+// Load Bulma's variables
+@import '~bulma/sass/utilities/all';
+
+// Load Bulma's mini reset and the generic styling
+@import '~bulma/sass/base/minireset';
+@import '~bulma/sass/base/generic';
+
+// Load Bulma's mixins and the container element
+@import '~bulma/sass/elements/container.sass';
+
+// Set up loading box
+.app-loading {
+  display: flex;
+  height: 90vh;
+
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+
+  box-sizing: border-box;
+  padding: 1rem 1.5rem;
+
+  pointer-events: none;
+
+  // Hide when React pushes in content
+  &:not(:only-child) {
+    display: none;
+  }
+
+  &__inner {
+    max-width: 400px;
+    font-size: 2.1rem;
+    color: $grey-dark;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__spinner {
+    position: relative;
+    width: 1.5em;
+    height: 1em;
+    margin: 0 .5em;
+
+    &::before {
+      @include loader;
+      @include center(1em);
+    }
+  }
+
+  &__text {
+    color: $grey-dark;
+  }
+}
+
+.alignment_block {
+  background: rgba(255, 0, 0, .6);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 50vh;
+}
+
+@function say-hi($arg) {
+  @return "#{$arg}";
+}
+
+$fa-500: \f26e;
+
+.app-loading__text {
+  &::before {
+    font-family: FontAwesomePro;
+    font-weight: normal;
+    content: say-hi($fa-500);
+    display: inline-block;
+    color: $red;
+  }
+}
