@@ -1,13 +1,27 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
-</html>
+{% extends '_foundation.html.twig' %}
+
+{% block foundation_title -%}
+{%- block title -%}Welcome{%- endblock -%} - Gumbo Assassin
+{%- endblock %}
+
+{% block foundation_meta %}
+{% block meta %}{% endblock %}
+{% endblock %}
+
+{% block foundation_stylesheets %}
+{% block stylesheets %}{% endblock %}
+{% endblock %}
+
+{% block foundation_body_class %}
+{% block body_class %}{% endblock %}
+{% endblock %}
+
+{% block foundation_body %}
+<div class="container is-fluid">
+  {% block body %}{% endblock %}
+</div>
+{% endblock %}
+
+{% block foundation_javascripts %}
+{% block javascripts %}{% endblock %}
+{% endblock %}

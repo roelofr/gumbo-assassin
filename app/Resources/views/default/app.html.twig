@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+<style media="screen">
+{{ launch_css|default('/* No CSS available :( */')|raw }}
+</style>
+{% endblock %}
+
+{% block body %}
+<div data-content="app-inner">
+  <div class="app-loading" role="presentation">
+    <div class="app-loading__inner">
+      <div class="app-loading__spinner" aria-label="Loading"></div>
+      <div class="app-loading__text">
+        loading.
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
