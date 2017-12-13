@@ -7,12 +7,16 @@
 {% endblock %}
 
 {% block body %}
+<!-- main app container -->
 <div data-content="app-inner">
+  <!-- Loading indicators, get replaced when React is ready -->
   <div class="app-loading" role="presentation">
+
+    <!-- Inner loader, contains the spinner and the "Loading" label -->
     <div class="app-loading__inner">
       <div class="app-loading__spinner" aria-label="Loading"></div>
       <div class="app-loading__text">
-        loading.
+        loading
       </div>
     </div>
   </div>
