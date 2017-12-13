@@ -11,6 +11,12 @@
 // Import Bulma.
 @import '~bulma/bulma';
 
+// Import Bootstrap mixins
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/utilities';
+
 // Load mixins
 @import 'mixins/all';
 
