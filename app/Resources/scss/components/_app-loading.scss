@@ -1,0 +1,48 @@
+///
+/// Loading Indicator
+///
+
+.app-loading {
+  display: flex;
+  height: 90vh;
+
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+
+  box-sizing: border-box;
+  padding: 1rem 1.5rem;
+
+  pointer-events: none;
+
+  // Hide when React pushes in content
+  &:not(:only-child) {
+    display: none;
+  }
+
+  &__inner {
+    max-width: 400px;
+    font-size: 2.1rem;
+    color: $grey-dark;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__spinner {
+    position: relative;
+    width: 1.5em;
+    height: 1em;
+    margin: 0 .5em;
+
+    &::before {
+      @include loader;
+      @include center(1em);
+    }
+  }
+
+  &__text {
+    color: $grey-dark;
+  }
+}
